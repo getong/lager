@@ -268,9 +268,8 @@ calculate_next_rotation([{day, Day}|T], {Date, _Time} = Now) ->
     end,
     case AdjustedDay of
         DoW -> %% rotation is today
-            OldDate = element(1, Now),
             case calculate_next_rotation(T, Now) of
-                {OldDate, _} = NewNow -> NewNow;
+                {Date, _} = NewNow -> NewNow;
                 {NewDate, _} ->
                     %% rotation *isn't* today! rerun the calculation
                     NewNow = {NewDate, {0, 0, 0}},
@@ -293,9 +292,8 @@ calculate_next_rotation([{date, last}|T], {{Year, Month, Day}, _} = Now) ->
     Last = calendar:last_day_of_the_month(Year, Month),
     case Last == Day of
         true -> %% doing rotation today
-            OldDate = element(1, Now),
             case calculate_next_rotation(T, Now) of
-                {OldDate, _} = NewNow -> NewNow;
+                {{Year, Month, Day}, _} = NewNow -> NewNow;
                 {NewDate, _} ->
                     %% rotation *isn't* today! rerun the calculation
                     NewNow = {NewDate, {0, 0, 0}},
@@ -305,11 +303,10 @@ calculate_next_rotation([{date, last}|T], {{Year, Month, Day}, _} = Now) ->
             NewNow = setelement(1, Now, {Year, Month, Last}),
             calculate_next_rotation(T, NewNow)
     end;
-calculate_next_rotation([{date, Date}|T], {{_, _, Date}, _} = Now) ->
+calculate_next_rotation([{date, Date}|T], {{Year, Month, Date}, _} = Now) ->
     %% rotation is today
-    OldDate = element(1, Now),
     case calculate_next_rotation(T, Now) of
-        {OldDate, _} = NewNow -> NewNow;
+        {{Year, Month, Date}, _} = NewNow -> NewNow;
         {NewDate, _} ->
             %% rotation *isn't* today! rerun the calculation
             NewNow = setelement(1, Now, NewDate),
