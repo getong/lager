@@ -29,8 +29,8 @@ pr_stacktrace_throw_test() ->
             lager:pr_stacktrace(?GET_STACK(Stacktrace), {Class, Reason})
     end,
 ExpectedPart = "
-    pr_stacktrace_test:pr_stacktrace_throw_test/0 line 18
-    pr_stacktrace_test:make_throw/0 line 8
+    pr_stacktrace_test:pr_stacktrace_throw_test/0 line 26
+    pr_stacktrace_test:make_throw/0 line 16
 throw:{test,exception}",
     ?assertNotEqual(0, string:str(Result, ExpectedPart)).
 
@@ -43,8 +43,8 @@ pr_stacktrace_bad_arg_test() ->
             lager:pr_stacktrace(?GET_STACK(Stacktrace), {Class, Reason})
     end,
 ExpectedPart = "
-    pr_stacktrace_test:pr_stacktrace_bad_arg_test/0 line 32
-    pr_stacktrace_test:bad_arg/0 line 14
+    pr_stacktrace_test:pr_stacktrace_bad_arg_test/0 line 40
+    pr_stacktrace_test:bad_arg/0 line 22
 error:badarg",
     ?assertNotEqual(0, string:str(Result, ExpectedPart)).
 
@@ -57,7 +57,7 @@ pr_stacktrace_bad_arity_test() ->
             lager:pr_stacktrace(?GET_STACK(Stacktrace), {Class, Reason})
     end,
 ExpectedPart = "
-    pr_stacktrace_test:pr_stacktrace_bad_arity_test/0 line 46
+    pr_stacktrace_test:pr_stacktrace_bad_arity_test/0 line 54
     lists:concat([], [])
 error:undef",
     ?assertNotEqual(0, string:str(Result, ExpectedPart)).
@@ -72,6 +72,6 @@ pr_stacktrace_no_reverse_test() ->
     end,
 ExpectedPart = "error:undef
     lists:concat([], [])
-    pr_stacktrace_test:pr_stacktrace_bad_arity_test/0 line 60",
+    pr_stacktrace_test:pr_stacktrace_bad_arity_test/0 line 68",
 
     ?assertEqual(0, string:str(Result, ExpectedPart)).
