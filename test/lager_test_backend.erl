@@ -1117,7 +1117,7 @@ error_logger_redirect_setup() ->
     application:set_env(lager, suppress_application_start_stop, false),
     lager:start(),
     lager:log(error, self(), "flush flush"),
-    timer:sleep(100),
+    timer:sleep(1000),
     gen_event:call(lager_event, ?MODULE, flush),
     lager_event.
 
@@ -1133,7 +1133,7 @@ error_logger_redirect_setup_sink() ->
     application:set_env(lager, suppress_application_start_stop, false),
     lager:start(),
     lager:log(error_logger_lager_event, error, self(), "flush flush", []),
-    timer:sleep(100),
+    timer:sleep(1000),
     gen_event:call(error_logger_lager_event, ?MODULE, flush),
     error_logger_lager_event.
 
