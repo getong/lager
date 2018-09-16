@@ -206,7 +206,7 @@ handle_info({shaper_expired, Name}, #state{shaper=Shaper, name=Name, formatter=F
             write(State, lager_msg:timestamp(ReportMsg),
                   lager_msg:severity_as_int(ReportMsg), Formatter:format(ReportMsg, FormatConfig))
     end,
-    {ok, State#state{shaper=Shaper#lager_shaper{dropped=0, mps=1, lasttime=os:timestamp()}}};
+    {ok, State#state{shaper=Shaper#lager_shaper{dropped=0, mps=0, lasttime=os:timestamp()}}};
 handle_info(_Info, State) ->
     {ok, State}.
 

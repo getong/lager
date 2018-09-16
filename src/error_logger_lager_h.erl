@@ -134,7 +134,7 @@ handle_info({shaper_expired, ?MODULE}, #state{sink=Sink, shaper=Shaper} = State)
                     "lager_error_logger_h dropped ~p messages in the last second that exceeded the limit of ~p messages/sec",
                     [Dropped, Shaper#lager_shaper.hwm])
     end,
-    {ok, State#state{shaper=Shaper#lager_shaper{dropped=0, mps=1, lasttime=os:timestamp()}}};
+    {ok, State#state{shaper=Shaper#lager_shaper{dropped=0, mps=0, lasttime=os:timestamp()}}};
 handle_info(_Info, State) ->
     {ok, State}.
 
