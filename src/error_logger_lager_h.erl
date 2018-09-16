@@ -613,6 +613,8 @@ no_silent_hwm_drops_test_() ->
                 application:set_env(lager, error_logger_redirect, true),
                 application:set_env(lager, error_logger_hwm, 5),
                 application:set_env(lager, error_logger_flush_queue, false),
+                application:set_env(lager, suppress_supervisor_start_stop, true),
+                application:set_env(lager, suppress_application_start_stop, true),
                 application:unset_env(lager, crash_log),
                 lager:start(),
                 try
