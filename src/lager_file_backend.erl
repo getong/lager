@@ -884,6 +884,7 @@ filesystem_test_() ->
 
             gen_event:add_handler(lager_event, lager_file_backend,
                 [{file, TestLog}, {level, critical}, {check_interval, always}]),
+            timer:sleep(500),
             lager:critical("Test message"),
             {ok, Bin1} = file:read_file(TestLog),
             ?assertMatch([_, _, "[critical]", _, "Test message\n"],

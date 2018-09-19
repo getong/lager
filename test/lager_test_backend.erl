@@ -871,7 +871,9 @@ setup() ->
     %% This race condition was first exposed during the work on
     %% 4b5260c4524688b545cc12da6baa2dfa4f2afec9 which introduced the lager
     %% manager killer PR.
-    timer:sleep(5),
+    application:set_env(lager, suppress_supervisor_start_stop, true),
+    application:set_env(lager, suppress_application_start_stop, true),
+    timer:sleep(1000),
     gen_event:call(lager_event, ?MODULE, flush).
 
 cleanup(_) ->
