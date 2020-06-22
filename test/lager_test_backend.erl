@@ -916,8 +916,8 @@ test_body(Expected, Actual) ->
     ExLen = length(Expected),
     {Body, Rest} = case length(Actual) > ExLen of
         true ->
-            {string:substr(Actual, 1, ExLen),
-                string:substr(Actual, (ExLen + 1))};
+            {string:slice(Actual, 0, ExLen),
+                string:slice(Actual, ExLen)};
         _ ->
             {Actual, []}
     end,
